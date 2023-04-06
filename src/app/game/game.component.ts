@@ -30,7 +30,7 @@ export class GameComponent implements OnInit{
   newGame() {
     this.game = new Game();
     const coll = collection(this.firestore, "games");
-    setDoc(doc(coll), {game: 'this.game'});
+    setDoc(doc(coll), this.game.toJson());
   }
 
   takeCard() {
