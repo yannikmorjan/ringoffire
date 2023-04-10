@@ -31,10 +31,8 @@ export class GameComponent implements OnInit{
         this.game.player_images = data.game.player_images;
         this.game.pickCardAnimation = data.game.pickCardAnimation;
         this.game.currentCard = data.game.currentCard;
-        
       })
-    })
-    
+    }) 
   }
 
   newGame() {
@@ -42,7 +40,10 @@ export class GameComponent implements OnInit{
   }
 
   takeCard() {
-    if(!this.game.pickCardAnimation && this.game.players.length > 0) {
+    if(this.game.stack.length == 0) {
+      this.game.gameOver = true;
+      this.saveGame();
+    } else if(!this.game.pickCardAnimation && this.game.players.length > 0) {
       this.game.currentCard = this.game.stack.pop();
       this.game.pickCardAnimation = true;
       this.game.currentPlayer++;
@@ -86,6 +87,15 @@ export class GameComponent implements OnInit{
         this.saveGame();
       }
     });
+  }
+
+  restartGame() {
+    const prevPlayers = this.game.players;
+    const prevPlayerImgs = this.game.player_images;
+    this.game = new Game();
+    this.game.players = prevPlayers;
+    this.game.player_images = prevPlayerImgs;
+    this.saveGame();
   }
 
 }
