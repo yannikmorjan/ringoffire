@@ -8,6 +8,9 @@
     border-bottom-right-radius: 50px;
     span {
         font-size: 14px;
+        max-width: 100px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
         overflow: hidden;
     }
     img{

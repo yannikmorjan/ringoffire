@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-game-info',
@@ -24,7 +25,7 @@ export class GameInfoComponent implements OnChanges {
 
   title: string = '';
   description: string = '';
-
+  invitLink: string = window.location.href;
   @Input() card: string;
 
   ngOnChanges(): void {

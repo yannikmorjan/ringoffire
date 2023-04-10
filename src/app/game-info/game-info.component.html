@@ -3,6 +3,7 @@
         {{ card ? title : 'Please pick a card' }}
     </mat-card-title>
     <mat-card-content>
-        {{ card ? description : 'Please click on the card stack to select the next card.'}}
+        {{ card ? description : 'Please click on the card stack to select the next card.'}}<br><br>
+        <span> Invite your friends with the following link: </span><span style="color: orange;">{{ invitLink }}</span>
     </mat-card-content>
 </mat-card>
