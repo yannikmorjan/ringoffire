@@ -40,21 +40,33 @@ export class GameComponent implements OnInit{
   }
 
   takeCard() {
-    if(this.game.stack.length == 0) {
-      this.game.gameOver = true;
-      this.saveGame();
-    } else if(!this.game.pickCardAnimation && this.game.players.length > 0) {
-      this.game.currentCard = this.game.stack.pop();
-      this.game.pickCardAnimation = true;
-      this.game.currentPlayer++;
-      this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
-      this.saveGame();
-      setTimeout(() => {
-        this.game.playedCards.push(this.game.currentCard);
-        this.game.pickCardAnimation = false;
-        this.saveGame();
-      }, 1000);
+    if(this.game.players.length > 0) {
+      if(this.game.stack.length == 0) {
+        this.setGameOver();
+      } else if(!this.game.pickCardAnimation && this.game.players.length > 0) {
+        this.playCard();
+      }
+    } else {
+      this.openDialog();
     }
+  }
+
+  playCard() {
+    this.game.currentCard = this.game.stack.pop();
+    this.game.pickCardAnimation = true;
+    this.game.currentPlayer++;
+    this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
+    this.saveGame();
+    setTimeout(() => {
+      this.game.playedCards.push(this.game.currentCard);
+      this.game.pickCardAnimation = false;
+      this.saveGame();
+    }, 1000);
+  }
+
+  setGameOver() {
+    this.game.gameOver = true;
+    this.saveGame();
   }
 
   openDialog(): void {
